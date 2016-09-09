@@ -7,7 +7,8 @@ Plug 'airblade/vim-gitgutter'
 " Themes
 Plug 'nanotech/jellybeans.vim'
 Plug 'morhetz/gruvbox'
-Plug 'chriskempson/base16-vim'
+" Plug 'chriskempson/base16-vim'
+Plug 'altercation/vim-colors-solarized'
 
 " IDE functionality
 Plug 'tpope/vim-rails'
@@ -20,6 +21,8 @@ Plug 'hsanson/vim-android'
 Plug 'valloric/YouCompleteMe'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-sleuth'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 " Aesthetics
 Plug 'ap/vim-css-color'
@@ -39,10 +42,10 @@ set autoindent
 set smarttab
 set foldmethod=manual
 retab
-set t_Co=256
+" set t_Co=256
 set background=dark
-let base16colorspace=256
-colorscheme base16-eighties
+" let base16colorspace=256
+colorscheme solarized
 filetype on
 filetype plugin on
 set tabstop=4
