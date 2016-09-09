@@ -3,12 +3,10 @@ call plug#begin()
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-"
+
 " Themes
 Plug 'nanotech/jellybeans.vim'
 Plug 'morhetz/gruvbox'
-" Plug 'chriskempson/base16-vim'
-Plug 'altercation/vim-colors-solarized'
 
 " IDE functionality
 Plug 'tpope/vim-rails'
@@ -45,7 +43,7 @@ retab
 " set t_Co=256
 set background=dark
 " let base16colorspace=256
-colorscheme solarized
+colorscheme gruvbox
 filetype on
 filetype plugin on
 set tabstop=4
