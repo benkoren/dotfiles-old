@@ -58,6 +58,8 @@ set splitbelow
 
 highlight clear SignColumn
 
+set clipboard=unnamedplus
+
 set directory=/tmp
 autocmd FileType make setlocal noexpandtab
 
