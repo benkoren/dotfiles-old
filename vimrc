@@ -1,4 +1,48 @@
+
+" === BASE CONFIG
+
+" Use Vim settings, rather then Vi settings. This setting must be as early
+" as possible, as it has side effects.
+set nocompatible
+" Don't wrap lines
+set linebreak
+" Make delete key work like normal apps
+set backspace=indent,eol,start
+" Display extra whitespace
+set list listchars=tab:»·,trail:·
+" Make it obvious where 80 characters is
+set textwidth=80
+set colorcolumn=+1
+" Turn off the auto-newline
+set fo-=t
+" GitGutter Config
+set updatetime=750
+" Make it so clipboard copy/paste works with Mac OSX
+set clipboard=unnamed
+" start searching before hitting enter
+set incsearch
+" Make sure cursor stays centered on the screen
+set scrolloff=20
+" Put filename in statusline
+set statusline+=%{fugitive#statusline()}
+set laststatus=2  " always show status line
+" Paste Toggle
+set pastetoggle=<F2>
+set showmode
+" It's useful to show the buffer number in the status line.
+set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+
+" Automatically strip whitespace on save.
+"autocmd BufWritePre * StripWhitespace
+
+
+
+" === PLUGINS
+
 call plug#begin()
+
+" Sensible defaults
+Plug 'tpope/vim-sensible'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -34,23 +78,67 @@ Plug 'chrisbra/csv.vim'
 
 call plug#end()
 
-syntax on
+
+
+" === SYNTAX HIGHLIGHTING
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
+  syntax on
+endif
+" Color overrides
+let base16colorspace=256  " Access colors present in 256 colorspace
+set background=dark
+syntax enable
+colorscheme gruvbox
+if &term =~ '256color'
+    " Disable Background Color Erase (BCE) so that color schemes
+    " work properly when Vim is used inside tmux and GNU screen.
+    set t_ut=
+endif
+" twig highlighting
+au BufRead,BufNewFile *.twig set filetype=htmljinja
+
+
+
+" === CODE_INDENTATION
+
+" Softtabs, 4 spaces by defaults
+set tabstop=4 softtabstop=0 shiftwidth=4 smarttab expandtab
+" Switch to a 2 space tab on these files
+autocmd FileType sass,scss,ruby,erb,yml,yaml,json setlocal shiftwidth=2 tabstop=2
+set shiftround
 set expandtab
 set autoindent
-set smarttab
-set foldmethod=manual
-retab
-" set t_Co=256
-set background=dark
-" let base16colorspace=256
-colorscheme gruvbox
+set smartindent
+
+
+
+" === CODE_FOLDING
+
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <Space> zf
+
+set foldmethod=syntax
+
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
+
+
+
+
+
+" === TODO: Audit the nonsense that follows.
+
+
 filetype on
 filetype plugin on
-set tabstop=4
-set shiftwidth=4
 set cc=79
 set nu
 set ls=2
+
+
 map j gj
 map k gk
 set backspace=2
